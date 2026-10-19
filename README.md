@@ -161,4 +161,6 @@ Engenharia de Software — PUC Minas
 
 ---
 
+Site hospedado: https://armando-schoenstatt.github.io/PortifolioDiaw/#about
+
 *Disciplina: DIAW — Desenvolvimento e Integração de Aplicações Web · 2025*
