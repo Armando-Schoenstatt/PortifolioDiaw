@@ -2,7 +2,7 @@
 
 > Portfólio desenvolvido para a disciplina **DIAW (Desenvolvimento e Integração de Aplicações Web)** — Engenharia de Software, PUC Minas.
 
-🔗 **[Acesse o site em produção →](https://seu-portfolio.vercel.app)**
+As integrações estão disponíveis no código local; estas alterações ainda não foram publicadas.
 
 ---
 
@@ -18,16 +18,16 @@
 |---|---|
 | HTML5 | Estrutura semântica da página |
 | Tailwind CSS (CDN) | Estilização utilitária e responsividade |
+| React + Vite | Aplicações interativas integradas ao portfólio |
 | JavaScript (ES6+) | Interatividade, renderização dinâmica e lógica |
 | EmailJS | Envio de e-mails diretamente do front-end |
 | Google Fonts (Inter) | Tipografia |
-| Vercel | Hospedagem e deploy contínuo |
 
 ---
 
 ## 📦 Dependências e Bibliotecas
 
-Todas as dependências são carregadas via CDN — **não há necessidade de instalação de pacotes**.
+O HTML da página fica em `index.html`; estilos e interações estão em `src/styles.css` e `src/main.js`. Os projetos interativos ficam incorporados diretamente nas seções do portfólio: o globo de habilidades aparece após **Sobre Mim**, Futebol após **Projetos** e Colaboradores GitHub em uma seção própria. O currículo tem um visualizador local de PDF; ao selecionar um arquivo, ele é exibido no navegador e não é enviado ao servidor. O efeito de cursor ReactBits continua global e sem botão. O código do WakaTime permanece no repositório, mas não aparece na interface. O site usa Tailwind CSS via CDN.
 
 ```html
 <!-- Tailwind CSS -->
@@ -46,52 +46,54 @@ Todas as dependências são carregadas via CDN — **não há necessidade de ins
 
 ```
 PortifolioDiaw/
-├── index.html          # Arquivo principal (HTML + CSS inline + JS)
-├── package.json        # Metadados do projeto (opcional, para Vite)
-├── vite.config.js      # Configuração do Vite (opcional)
-├── tailwind.config.js  # Configuração do Tailwind (opcional)
-├── postcss.config.js   # Configuração do PostCSS (opcional)
-└── README.md           # Documentação do projeto
+├── index.html             # Portfólio e acesso às ferramentas
+├── src/
+│   ├── main.jsx           # Entrada React da página
+│   ├── components/        # Globo de habilidades, painéis integrados e currículo
+│   ├── main.js            # Conteúdo e interações do portfólio
+│   └── styles.css         # Estilos específicos do site
+├── apps/
+│   ├── ReactBits/         # Efeito de cursor Fumaça, sem controles
+│   ├── ContributorStats/  # Análise de colaboradores do GitHub
+│   ├── WakaTimeAPI/       # Código preservado, desativado na interface
+│   └── ESPN_API/          # Painel de futebol
+├── api/                   # Funções de API para credenciais server-side
+├── package.json           # Instalação e build do conjunto
+└── README.md
 ```
 
-> O projeto é **100% single-file** (`index.html`), sem necessidade de build step. Basta abrir o arquivo no navegador ou fazer deploy direto na Vercel/GitHub Pages.
+Os componentes reaproveitados mantêm seus avisos de licença nas respectivas pastas; o aviso do SkillsGlobe está junto do componente em `src/components/SkillsShowcase/`.
 
 ---
 
-## ⚙️ Instalação e Execução Local
+## ⚙️ Instalação e execução local
 
-### Opção 1 — Abrir diretamente (mais simples)
-
-```bash
-# Clone o repositório
-git clone https://github.com/ArmandoLC13/portfolio-diaw.git
-
-# Acesse a pasta
-cd portfolio-diaw
-
-# Abra o arquivo no navegador
-# Windows:
-start index.html
-# macOS:
-open index.html
-# Linux:
-xdg-open index.html
-```
-
-### Opção 2 — Servidor local com Live Server (VS Code)
-
-1. Instale a extensão **Live Server** no VS Code
-2. Clique com o botão direito em `index.html`
-3. Selecione **"Open with Live Server"**
-
-### Opção 3 — Servidor local com Python
+Requer **Node.js 22.12 ou mais recente**. Para usar os projetos interativos, execute o site pelo Vite (abrir `index.html` diretamente ou usar Live Server não basta):
 
 ```bash
-# Python 3
-python -m http.server 3000
-
-# Acesse: http://localhost:3000
+npm install
+npm run dev
 ```
+
+Abra o endereço local informado pelo Vite. O globo de habilidades fica abaixo de **Sobre Mim**; o painel compacto de Futebol, abaixo de **Projetos**; e Colaboradores GitHub carrega automaticamente as contribuições do repositório `Armando-Schoenstatt/PortifolioDiaw`, com um link para o perfil completo. O currículo permite selecionar um PDF local para pré-visualização.
+
+As consultas da ESPN passam por `/api/espn` no mesmo servidor e só encaminham os endpoints usados pelo painel. Isso evita bloqueios de CORS e não exige chave da ESPN.
+
+Para gerar os arquivos de produção do portfólio e das quatro aplicações:
+
+```bash
+npm run build
+```
+
+Os segredos ficam no servidor, nunca no JavaScript do navegador. Se precisar de análise de todas as branches do GitHub, copie `.env.example` para `.env.local` e adicione a credencial localmente. Para publicar mais tarde, configure a variável como segredo do provedor de hospedagem. Não envie tokens ou segredos pelo GitHub.
+
+### ContributorStats
+
+Sem `GITHUB_TOKEN`, a análise de repositórios públicos continua disponível no modo compatível com a API anônima do GitHub. Para análise de todas as branches ou acesso a repositórios privados, configure `GITHUB_TOKEN`. Se usar um token com acesso a repositórios privados, limite `GITHUB_ALLOWED_OWNERS` aos proprietários de repositório que podem ser analisados.
+
+### ReactBits
+
+O efeito Fumaça (`SplashCursor`) fica fixo no portfólio inteiro, sem seletor nem botão extra. Sua cor cinza-gelo complementa a paleta monocromática.
 
 ---
 
@@ -112,21 +114,17 @@ const EMAILJS_KEY      = 'YOUR_PUBLIC_KEY';   // ex: 'user_XXXXXXXXXXXXXXX'
 
 ---
 
-## 🌐 Deploy na Vercel
+## 🌐 Publicação futura
 
-### Via GitHub (recomendado)
+A publicação não foi iniciada. Quando for publicar, use uma hospedagem que execute as funções de API do servidor, como a Vercel; o GitHub Pages sozinho não consegue guardar os tokens nem executar as rotas de API.
 
-1. Faça push do projeto para um repositório GitHub
-2. Acesse [vercel.com](https://vercel.com) e faça login com GitHub
-3. Clique em **"New Project"** → importe o repositório
-4. Clique em **"Deploy"** — sem configuração adicional necessária
-
-### Via Vercel CLI
+Antes do primeiro deploy, configure `GITHUB_TOKEN` e `GITHUB_ALLOWED_OWNERS`, se necessário, em **Environment Variables** na hospedagem. Não inclua segredos em arquivos commitados nem no bundle público.
 
 ```bash
-npm i -g vercel
-vercel --prod
+npm run build
 ```
+
+O build gera o portfólio e os quatro aplicativos em `dist/`.
 
 ---
 
@@ -134,9 +132,21 @@ vercel --prod
 
 - **Hero** — Apresentação com nome, cargo e CTAs
 - **Sobre Mim** — Descrição em Português 🇧🇷 e Inglês 🇺🇸
-- **Projetos** — Timeline cronológica com tecnologias e links para GitHub
+- **Habilidades** — Globo 3D interativo, com filtro por categoria e visualização em lista
+- **Projetos** — Timeline e painel de futebol ao vivo integrado
+- **Currículo em PDF** — Pré-visualização de arquivo escolhido localmente
+- **Colaboradores GitHub** — Painel interativo integrado à página
 - **Experiências** — Histórico acadêmico e profissional
 - **Contato** — Links sociais + formulário funcional com validação
+
+### Ferramentas incluídas
+
+- **ReactBits** — efeito Fumaça aplicado globalmente, sem seletor ou botão.
+- **ContributorStats** — ranking de colaboradores e métricas de repositórios do GitHub.
+- **ESPN Sports Dashboard** — partidas, placares e classificação do futebol.
+- **Skills Globe** — componente interativo adaptado do projeto [SkillsGlobe](https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/React/SkillsGlobe), licenciado sob MIT; o aviso original está em `src/components/SkillsShowcase/LICENSE.upstream`.
+
+O código reaproveitado mantém os avisos de licença MIT do projeto original; os componentes ReactBits também preservam a licença MIT + Commons Clause em `apps/ReactBits/src/components/reactbits/LICENSE-react-bits.md`.
 
 ---
 
@@ -149,7 +159,7 @@ vercel --prod
 - [x] Formulário com validação e envio via EmailJS
 - [x] Links sociais (GitHub, LinkedIn, WhatsApp, E-mail)
 - [x] Menu mobile (hamburger)
-- [x] Zero dependências de build
+- [x] Três aplicações interativas embutidas
 
 ---
 

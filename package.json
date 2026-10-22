@@ -3,22 +3,32 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "workspaces": [
+    "apps/ReactBits",
+    "apps/ContributorStats",
+    "apps/WakaTimeAPI",
+    "apps/ESPN_API"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run build:tools",
+    "build:tools": "npm run build --workspace=react-bits-mouse && npm run build --workspace=contributor-stats && npm run build --workspace=wakatime-api && npm run build --workspace=espn-api",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "framer-motion": "^11.3.0",
     "react-hook-form": "^7.52.0",
     "@emailjs/browser": "^4.3.3",
-    "react-icons": "^5.2.1"
+    "react-icons": "^5.7.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
