@@ -1,5 +1,7 @@
 import { createRoot } from "react-dom/client";
+import SwarmCursor from "../apps/ReactBits/src/components/reactbits/SwarmCursor/SwarmCursor";
 import SkillsSection from "./components/SkillsShowcase/SkillsSection";
+import GitHubProfile from "./components/GitHubProfile";
 import InlineAppFrame from "./components/InlineAppFrame";
 import CurriculumPdf from "./components/CurriculumPdf";
 import SKILLS, { CATEGORIES } from "./data/skills";
@@ -12,11 +14,24 @@ function mount(id, content) {
 
 mount("skills-app", <SkillsSection skills={SKILLS} categories={CATEGORIES} />);
 mount(
+  "reactbits-cursor",
+  <SwarmCursor
+    count={600}
+    size={2.1}
+    spread={100}
+    tail={0.55}
+    speed={1.2}
+    swirl={0.8}
+    trail={1}
+    wander={0.3}
+    color="#ffffff"
+    accentColor="#ffffff"
+    style={{ position: "fixed", inset: 0, zIndex: 1, pointerEvents: "none" }}
+  />
+);
+mount(
   "football-app",
   <InlineAppFrame src="./apps/ESPN_API/index.html" title="Painel interativo de futebol" />
 );
-mount(
-  "contributors-app",
-  <InlineAppFrame src="./apps/ContributorStats/index.html" title="Painel de colaboradores do GitHub" />
-);
+mount("github-profile-app", <GitHubProfile />);
 mount("curriculum-app", <CurriculumPdf />);

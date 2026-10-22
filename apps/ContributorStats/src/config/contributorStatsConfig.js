@@ -7,8 +7,8 @@ const CONTRIBUTOR_STATS_CONFIG = {
   // Rota do próprio site que fala com o GitHub (ver api/_github.js)
   API_PATH: "/api/github",
 
-  // Repositório do portfólio usado ao abrir a página
-  DEFAULT_REPO_URL: "https://github.com/Armando-Schoenstatt/PortifolioDiaw",
+  // Nenhum repositório pré-selecionado; informe um para analisar esta ferramenta.
+  DEFAULT_REPO_URL: "",
 
   // Commits por página no GraphQL (máx. 100). Em caso de timeout, o valor é reduzido.
   GRAPHQL_PAGE_SIZE: 100,

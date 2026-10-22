@@ -798,7 +798,7 @@ const SwarmCursor = ({
       const s = settingsRef.current;
       const dt = last ? clamp((now - last) / 1000, 0.001, 1 / 30) : 1 / 60;
       last = now;
-      if (!s.enabled || reduce) {
+      if (!s.enabled) {
         setHidden(false);
         draw();
         return;
@@ -806,15 +806,22 @@ const SwarmCursor = ({
       time += dt;
       burst.age += dt;
       ping.age += dt;
-      if (introClock < 1) introClock = Math.min(1, introClock + dt / INTRO_SECONDS);
+      if (reduce) {
+        introClock = 1;
+      } else if (introClock < 1) {
+        introClock = Math.min(1, introClock + dt / INTRO_SECONDS);
+      }
       const ease = introClock * introClock * (3 - 2 * introClock);
       hovered = findTarget();
-      updateAnchor(s, dt);
+      updateAnchor(
+        reduce && !pointer.inside ? { ...s, idle: 'hide' } : s,
+        dt
+      );
       setHidden(s.hideCursor && pointer.inside);
       stir(s, dt, ease);
       flow(s, dt);
-      move(s, dt / 2, ease);
-      move(s, dt / 2, ease);
+      move(s, reduce ? dt : dt / 2, ease);
+      if (!reduce) move(s, dt / 2, ease);
       draw();
       raf = requestAnimationFrame(frame);
     };
@@ -835,6 +842,15 @@ const SwarmCursor = ({
       pointer.x = x;
       pointer.y = y;
       pointer.inside = inside;
+    };
+
+    const onEmbeddedPointerMove = event => {
+      if (!event.detail) return;
+      onPointerMove(event.detail);
+    };
+
+    const onEmbeddedPointerLeave = () => {
+      pointer.inside = false;
     };
 
     const onPointerDown = event => {
@@ -901,6 +917,8 @@ const SwarmCursor = ({
     });
     intersection.observe(container);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('portfolio-embedded-pointermove', onEmbeddedPointerMove);
+    window.addEventListener('portfolio-embedded-pointerleave', onEmbeddedPointerLeave);
     window.addEventListener('pointerdown', onPointerDown, { passive: true });
     window.addEventListener('pointerup', onPointerUp, { passive: true });
     window.addEventListener('pointercancel', onPointerUp, { passive: true });
@@ -916,6 +934,8 @@ const SwarmCursor = ({
       resizeObserver.disconnect();
       intersection.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('portfolio-embedded-pointermove', onEmbeddedPointerMove);
+      window.removeEventListener('portfolio-embedded-pointerleave', onEmbeddedPointerLeave);
       window.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
       window.removeEventListener('pointercancel', onPointerUp);

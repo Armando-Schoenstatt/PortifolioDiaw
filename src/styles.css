@@ -15,9 +15,6 @@ body { background: #030303; }
       border: 0;
       background: transparent;
     }
-    #github-contributors .inline-app-frame {
-      min-height: 900px;
-    }
     .tag {
       display: inline-block;
       font-size: 0.7rem;

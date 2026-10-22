@@ -40,7 +40,7 @@
     </button>
     <ul class="hidden lg:flex items-center gap-4 xl:gap-8 text-sm font-medium text-gray-300">
       <li><a href="#about" class="hover:text-primary transition-colors" data-pt="Sobre" data-en="About">Sobre</a></li>
-      <li><a href="#github-contributors" class="hover:text-primary transition-colors" data-pt="Projetos interativos" data-en="Interactive projects">Projetos interativos</a></li>
+      <li><a href="#github-profile" class="hover:text-primary transition-colors" data-pt="GitHub" data-en="GitHub">GitHub</a></li>
       <li><a href="#projects" class="hover:text-primary transition-colors" data-pt="Projetos" data-en="Projects">Projetos</a></li>
       <li><a href="#experience" class="hover:text-primary transition-colors" data-pt="Experiências" data-en="Experience">Experiências</a></li>
       <li><a href="#contact" class="hover:text-primary transition-colors" data-pt="Contato" data-en="Contact">Contato</a></li>
@@ -50,7 +50,7 @@
   <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-800 px-6 py-4" style="background:rgba(3,3,3,0.97)">
     <ul class="flex flex-col gap-4 text-sm font-medium text-gray-300">
       <li><a href="#about" class="hover:text-primary transition-colors" data-pt="Sobre" data-en="About">Sobre</a></li>
-      <li><a href="#github-contributors" class="hover:text-primary transition-colors" data-pt="Projetos interativos" data-en="Interactive projects">Projetos interativos</a></li>
+      <li><a href="#github-profile" class="hover:text-primary transition-colors" data-pt="GitHub" data-en="GitHub">GitHub</a></li>
       <li><a href="#projects" class="hover:text-primary transition-colors" data-pt="Projetos" data-en="Projects">Projetos</a></li>
       <li><a href="#experience" class="hover:text-primary transition-colors" data-pt="Experiências" data-en="Experience">Experiências</a></li>
       <li><a href="#contact" class="hover:text-primary transition-colors" data-pt="Contato" data-en="Contact">Contato</a></li>
@@ -70,7 +70,7 @@
       Estudante de Engenharia de Software · Desenvolvedor Full Stack
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="#github-contributors" class="bg-primary hover:bg-secondary text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/30" data-pt="Ver projetos interativos" data-en="View interactive projects">Ver projetos interativos</a>
+      <a href="#github-profile" class="bg-primary hover:bg-secondary text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/30" data-pt="Ver meu GitHub" data-en="View my GitHub">Ver meu GitHub</a>
       <a href="#contact" class="border border-gray-700 hover:border-primary text-gray-300 hover:text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300" data-pt="Entrar em Contato" data-en="Get in Touch">Entrar em Contato</a>
     </div>
   </div>
@@ -182,16 +182,15 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════ GITHUB CONTRIBUTORS ═══════════════════════════ -->
-<section id="github-contributors" class="py-24 px-6">
+<!-- ═══════════════════════════ GITHUB PROFILE ════════════════════════════════ -->
+<section id="github-profile" class="py-24 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-10">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3" data-pt="Colaboradores GitHub" data-en="GitHub contributors">Colaboradores GitHub</h2>
-      <p class="text-gray-400 text-sm" data-pt="Contribuições do meu portfólio, carregadas automaticamente. Veja também meus outros projetos no GitHub." data-en="Contributions to my portfolio, loaded automatically. See my other projects on GitHub too.">Contribuições do meu portfólio, carregadas automaticamente. Veja também meus outros projetos no GitHub.</p>
-      <a class="inline-block mt-4 text-gray-300 underline underline-offset-4 hover:text-white" href="https://github.com/Armando-Schoenstatt" target="_blank" rel="noopener noreferrer" data-pt="Ver meu perfil completo no GitHub" data-en="View my full GitHub profile">Ver meu perfil completo no GitHub</a>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3" data-pt="Meu GitHub" data-en="My GitHub">Meu GitHub</h2>
+      <p class="text-gray-400 text-sm" data-pt="Resumo da minha conta e dos meus repositórios públicos." data-en="An overview of my account and public repositories.">Resumo da minha conta e dos meus repositórios públicos.</p>
       <div class="w-16 h-1 bg-primary mx-auto rounded-full mt-3"></div>
     </div>
-    <div id="contributors-app"></div>
+    <div id="github-profile-app"></div>
   </div>
 </section>
 
@@ -259,6 +258,5 @@
 </footer>
 
 <script type="module" src="./src/main.jsx"></script>
-<script type="module" src="./apps/ReactBits/src/cursor.jsx"></script>
 </body>
 </html>

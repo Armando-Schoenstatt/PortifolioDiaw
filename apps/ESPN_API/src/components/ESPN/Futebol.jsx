@@ -1,12 +1,13 @@
 import { useState } from "react";
 import ESPN_CONFIG from "../../config/espnConfig";
-import { fetchSoccerTeams } from "../../services/espnService";
-import { Skeleton, TeamLogo } from "./Shared";
+import { fetchSoccerTeam, fetchSoccerTeams } from "../../services/espnService";
+import { Card, ErrorBox, Skeleton, TeamLogo } from "./Shared";
+import { GameList } from "./Games";
 import { standingText } from "./translate";
-import { useEspn } from "./useEspn";
+import { useEspn, useNow } from "./useEspn";
 
 /**
- * Visão compacta dos clubes, sem calendário, resultados ou classificação.
+ * Jogos ao vivo e próximos jogos do clube selecionado.
  *
  * <Futebol />                      → time de ESPN_CONFIG.SOCCER.DEFAULT_TEAM_ID
  * <Futebol initialTeam="2022" />   → outro time (id da ESPN)
@@ -20,7 +21,11 @@ export default function Futebol({ initialTeam = SOCCER.DEFAULT_TEAM_ID }) {
     allowedTeamIds.includes(String(initialTeam)) ? String(initialTeam) : SOCCER.DEFAULT_TEAM_ID
   );
   const teams = useEspn(fetchSoccerTeams, []);
-  const team = teams.data?.find((item) => item.id === teamId);
+  const schedule = useEspn(() => fetchSoccerTeam(teamId), [teamId]);
+  const now = useNow();
+  const team = teams.data?.find((item) => item.id === teamId) ?? schedule.data?.team;
+  const liveGames = schedule.data?.next.filter((game) => game.state === "in") ?? [];
+  const upcomingGames = schedule.data?.next.filter((game) => game.state === "pre").slice(0, 3) ?? [];
 
   return (
     <div className="espn-sport">
@@ -48,15 +53,11 @@ export default function Futebol({ initialTeam = SOCCER.DEFAULT_TEAM_ID }) {
       </div>
 
       {teams.status === "error" && (
-        <div className="espn-message error" role="alert">
-          <strong>Não foi possível carregar os times da ESPN.</strong>
-          <span>{teams.error.message}</span>
-          <button type="button" className="espn-retry" onClick={teams.reload}>
-            Tentar de novo
-          </button>
-        </div>
+        <ErrorBox error={teams.error} onRetry={teams.reload} />
       )}
       {teams.status === "loading" && !teams.data && <Skeleton blocks={[120]} />}
+      {schedule.status === "error" && <ErrorBox error={schedule.error} onRetry={schedule.reload} />}
+      {schedule.status === "loading" && !schedule.data && <Skeleton blocks={[120, 120]} />}
       {team && (
         <header className="espn-team">
           <TeamLogo team={team} size={64} />
@@ -66,6 +67,24 @@ export default function Futebol({ initialTeam = SOCCER.DEFAULT_TEAM_ID }) {
             {team.record && <p>Campanha: {team.record}</p>}
           </div>
         </header>
+      )}
+      {schedule.data && (
+        <>
+          <Card title="Ao vivo">
+            <GameList
+              games={liveGames}
+              now={now}
+              empty={`Nenhum jogo de ${team?.short ?? "Atlético-MG"} ao vivo neste momento.`}
+            />
+          </Card>
+          <Card title="Próximos jogos">
+            <GameList
+              games={upcomingGames}
+              now={now}
+              empty="Nenhum próximo jogo encontrado."
+            />
+          </Card>
+        </>
       )}
     </div>
   );
