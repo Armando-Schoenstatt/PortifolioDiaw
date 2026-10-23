@@ -114,9 +114,9 @@ const EMAILJS_KEY      = 'YOUR_PUBLIC_KEY';   // ex: 'user_XXXXXXXXXXXXXXX'
 
 ---
 
-## 🌐 Publicação futura
+## 🌐 Publicação na Vercel
 
-A publicação não foi iniciada. Quando for publicar, use uma hospedagem que execute as funções de API do servidor, como a Vercel; o GitHub Pages sozinho não consegue guardar os tokens nem executar as rotas de API.
+O repositório inclui `vercel.json` para publicar o portfólio e as aplicações como serviços Vercel. O serviço `ArmandoMoreira` recebe o tráfego público na raiz (`/`); os serviços das aplicações ficam internos. O próprio build do portfólio gera os arquivos usados pelas aplicações incorporadas, inclusive o painel ESPN carregado pelo iframe. As rotas `/api/...` são atendidas no serviço principal, sem bindings entre serviços.
 
 Antes do primeiro deploy, configure `GITHUB_TOKEN` e `GITHUB_ALLOWED_OWNERS`, se necessário, em **Environment Variables** na hospedagem. Não inclua segredos em arquivos commitados nem no bundle público.
 
