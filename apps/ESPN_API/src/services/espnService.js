@@ -62,7 +62,14 @@ async function getJson(url) {
     throw new EspnError("network", "Sem conexão com a ESPN.");
   }
   if (!response.ok) {
-    throw new EspnError("http", `A ESPN respondeu ${response.status}.`);
+    let message = `A ESPN respondeu ${response.status}.`;
+    try {
+      const body = await response.json();
+      if (typeof body.message === "string") message = body.message;
+    } catch {
+      // A resposta de erro pode vir de uma camada intermediária sem JSON.
+    }
+    throw new EspnError("http", message);
   }
   return response.json();
 }

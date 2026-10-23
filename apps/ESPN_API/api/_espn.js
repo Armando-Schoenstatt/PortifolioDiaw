@@ -69,7 +69,7 @@ export async function handleEspn(req, res) {
   if (!response.ok) {
     return send(res, response.status, {
       error: "espn_upstream",
-      message: `A ESPN respondeu ${response.status}.`,
+      message: `A ESPN respondeu ${response.status} para ${upstreamUrl.pathname}${upstreamUrl.search}.`,
     });
   }
 
