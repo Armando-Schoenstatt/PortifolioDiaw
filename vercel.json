@@ -32,12 +32,6 @@
   },
   "rewrites": [
     {
-      "source": "/api/espn",
-      "destination": {
-        "service": "espn-api"
-      }
-    },
-    {
       "source": "/(.*)",
       "destination": {
         "service": "armando-moreira"
