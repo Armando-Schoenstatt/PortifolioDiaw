@@ -116,7 +116,7 @@ const EMAILJS_KEY      = 'YOUR_PUBLIC_KEY';   // ex: 'user_XXXXXXXXXXXXXXX'
 
 ## 🌐 Publicação na Vercel
 
-O repositório inclui `vercel.json` para publicar o portfólio e as aplicações como serviços Vercel. O serviço `armando-moreira` recebe o tráfego público na raiz (`/`); a rota `/api/espn` é encaminhada ao handler do serviço `espn-api`. Os demais serviços das aplicações não recebem tráfego público. O próprio build do portfólio gera os arquivos usados pelas aplicações incorporadas, inclusive o painel ESPN carregado pelo iframe. O painel acessa a ESPN por `/api/espn`; não há chamadas server-to-server nem bindings entre serviços.
+O repositório é publicado como um único projeto Vite na Vercel. O build `npm run build` gera o site e as aplicações incorporadas em `dist/`, e a função na raiz `api/espn.js` atende `/api/espn` no mesmo deploy. Não é necessário encaminhar a rota para um serviço separado. As credenciais opcionais devem ser configuradas em **Environment Variables**; nunca inclua segredos no código ou no bundle público.
 
 Antes do primeiro deploy, configure `GITHUB_TOKEN` e `GITHUB_ALLOWED_OWNERS`, se necessário, em **Environment Variables** na hospedagem. Não inclua segredos em arquivos commitados nem no bundle público.
 
