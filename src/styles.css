@@ -102,6 +102,9 @@ body { background: #030303; }
     .curriculum-upload:focus-within {
       background: #4b5563;
     }
+    a.curriculum-upload {
+      text-decoration: none;
+    }
     .curriculum-upload input {
       position: absolute;
       width: 1px;

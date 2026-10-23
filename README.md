@@ -27,7 +27,7 @@ As integrações estão disponíveis no código local; estas alterações ainda 
 
 ## 📦 Dependências e Bibliotecas
 
-O HTML da página fica em `index.html`; estilos e interações estão em `src/styles.css` e `src/main.js`. Os projetos interativos ficam incorporados diretamente nas seções do portfólio: o globo de habilidades aparece após **Sobre Mim**, Futebol após **Projetos** e Colaboradores GitHub em uma seção própria. O currículo tem um visualizador local de PDF; ao selecionar um arquivo, ele é exibido no navegador e não é enviado ao servidor. O efeito de cursor ReactBits continua global e sem botão. O código do WakaTime permanece no repositório, mas não aparece na interface. O site usa Tailwind CSS via CDN.
+O HTML da página fica em `index.html`; estilos e interações estão em `src/styles.css` e `src/main.js`. Os projetos interativos ficam incorporados diretamente nas seções do portfólio: o globo de habilidades aparece após **Sobre Mim**, Futebol após **Projetos** e Colaboradores GitHub em uma seção própria. A seção de currículo exibe `CurriculoArmandoSchoenstatt.pdf` por padrão, permite baixá-lo e também selecionar outro PDF local para visualização sem enviá-lo ao servidor. O efeito de cursor ReactBits continua global e sem botão. O código do WakaTime permanece no repositório, mas não aparece na interface. O site usa Tailwind CSS via CDN.
 
 ```html
 <!-- Tailwind CSS -->
@@ -116,7 +116,7 @@ const EMAILJS_KEY      = 'YOUR_PUBLIC_KEY';   // ex: 'user_XXXXXXXXXXXXXXX'
 
 ## 🌐 Publicação na Vercel
 
-O repositório inclui `vercel.json` para publicar o portfólio e as aplicações como serviços Vercel. O serviço `armando-moreira` recebe o tráfego público na raiz (`/`); os serviços das aplicações ficam internos. O próprio build do portfólio gera os arquivos usados pelas aplicações incorporadas, inclusive o painel ESPN carregado pelo iframe. As rotas `/api/...` são atendidas no serviço principal, sem bindings entre serviços.
+O repositório inclui `vercel.json` para publicar o portfólio e as aplicações como serviços Vercel. O serviço `armando-moreira` recebe o tráfego público na raiz (`/`); a rota `/api/espn` é encaminhada ao handler do serviço `espn-api`. Os demais serviços das aplicações não recebem tráfego público. O próprio build do portfólio gera os arquivos usados pelas aplicações incorporadas, inclusive o painel ESPN carregado pelo iframe. O painel acessa a ESPN por `/api/espn`; não há chamadas server-to-server nem bindings entre serviços.
 
 Antes do primeiro deploy, configure `GITHUB_TOKEN` e `GITHUB_ALLOWED_OWNERS`, se necessário, em **Environment Variables** na hospedagem. Não inclua segredos em arquivos commitados nem no bundle público.
 
