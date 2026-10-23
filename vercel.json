@@ -1,17 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "services": {
-    "ArmandoMoreira": {
+    "armando-moreira": {
       "root": ".",
       "framework": "vite"
     },
-    "contributorstats": {
+    "contributor-stats": {
       "root": "apps/ContributorStats",
       "framework": "vite",
       "buildCommand": "npm run build -- --outDir dist",
       "outputDirectory": "dist"
     },
-    "espn_api": {
+    "espn-api": {
       "root": "apps/ESPN_API",
       "framework": "vite",
       "buildCommand": "npm run build -- --outDir dist",
@@ -23,7 +23,7 @@
       "buildCommand": "npm run build -- --outDir dist",
       "outputDirectory": "dist"
     },
-    "wakatimeapi": {
+    "wakatime-api": {
       "root": "apps/WakaTimeAPI",
       "framework": "vite",
       "buildCommand": "npm run build -- --outDir dist",
@@ -34,7 +34,7 @@
     {
       "source": "/(.*)",
       "destination": {
-        "service": "ArmandoMoreira"
+        "service": "armando-moreira"
       }
     }
   ]
