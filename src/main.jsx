@@ -1,7 +1,8 @@
 import { createRoot } from "react-dom/client";
 import SwarmCursor from "../apps/ReactBits/src/components/reactbits/SwarmCursor/SwarmCursor";
 import SkillsSection from "./components/SkillsShowcase/SkillsSection";
-import GitHubProfile from "./components/GitHubProfile";
+import GitHubActivity from "./components/GitHubActivity";
+import GitHubCommits from "./components/GitHubCommits";
 import InlineAppFrame from "./components/InlineAppFrame";
 import CurriculumPdf from "./components/CurriculumPdf";
 import SKILLS, { CATEGORIES } from "./data/skills";
@@ -33,5 +34,6 @@ mount(
   "football-app",
   <InlineAppFrame src="./apps/ESPN_API/index.html" title="Painel interativo de futebol" />
 );
-mount("github-profile-app", <GitHubProfile />);
+mount("github-profile-app", <GitHubActivity />);
+mount("github-commits-app", <GitHubCommits />);
 mount("curriculum-app", <CurriculumPdf />);

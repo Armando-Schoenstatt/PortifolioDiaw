@@ -40,6 +40,7 @@
     </button>
     <ul class="hidden lg:flex items-center gap-4 xl:gap-8 text-sm font-medium text-gray-300">
       <li><a href="#about" class="hover:text-primary transition-colors" data-pt="Sobre" data-en="About">Sobre</a></li>
+      <li><a href="#certificates" class="hover:text-primary transition-colors" data-pt="Certificados" data-en="Certificates">Certificados</a></li>
       <li><a href="#github-profile" class="hover:text-primary transition-colors" data-pt="GitHub" data-en="GitHub">GitHub</a></li>
       <li><a href="#projects" class="hover:text-primary transition-colors" data-pt="Projetos" data-en="Projects">Projetos</a></li>
       <li><a href="#experience" class="hover:text-primary transition-colors" data-pt="Experiências" data-en="Experience">Experiências</a></li>
@@ -50,6 +51,7 @@
   <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-800 px-6 py-4" style="background:rgba(3,3,3,0.97)">
     <ul class="flex flex-col gap-4 text-sm font-medium text-gray-300">
       <li><a href="#about" class="hover:text-primary transition-colors" data-pt="Sobre" data-en="About">Sobre</a></li>
+      <li><a href="#certificates" class="hover:text-primary transition-colors" data-pt="Certificados" data-en="Certificates">Certificados</a></li>
       <li><a href="#github-profile" class="hover:text-primary transition-colors" data-pt="GitHub" data-en="GitHub">GitHub</a></li>
       <li><a href="#projects" class="hover:text-primary transition-colors" data-pt="Projetos" data-en="Projects">Projetos</a></li>
       <li><a href="#experience" class="hover:text-primary transition-colors" data-pt="Experiências" data-en="Experience">Experiências</a></li>
@@ -62,6 +64,20 @@
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
   <div class="hero-bg absolute inset-0 pointer-events-none"></div>
+  <div class="code-ambient code-ambient--left" aria-hidden="true">
+    <pre><span>const</span> portfolio = {
+  foco: <b>"aprender"</b>,
+  ideias: <b>"em prática"</b>,
+  build() { <i>return</i> evolução }
+}</pre>
+  </div>
+  <div class="code-ambient code-ambient--right" aria-hidden="true">
+    <pre><span>while</span> (curiosidade) {
+  estudar()
+  construir()
+  <i>commit</i>(<b>"mais uma ideia"</b>)
+}</pre>
+  </div>
   <div class="relative z-10 text-center px-6 max-w-4xl mx-auto fade-up">
     <div class="w-28 h-28 rounded-full border-4 border-primary mx-auto mb-6 bg-primary/20 flex items-center justify-center text-4xl font-extrabold text-primary shadow-xl shadow-primary/20">AM</div>
     <p class="text-primary font-semibold text-sm mb-3 tracking-[0.2em] uppercase" data-pt="Olá, eu sou" data-en="Hi, I'm">Olá, eu sou</p>
@@ -81,7 +97,19 @@
   </a>
 </section>
 
-
+<!-- ═══════════════════════════ RECENT COMMITS ═══════════════════════════ -->
+<section id="recent-commits" class="recent-commits-section px-6 pb-12" aria-labelledby="commits-title">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+      <div>
+        <p class="text-primary text-xs font-bold tracking-[0.2em] uppercase" data-pt="Atividade recente" data-en="Recent activity">Atividade recente</p>
+        <h2 id="commits-title" class="text-xl md:text-2xl font-bold text-white mt-1" data-pt="Commits em movimento" data-en="Commits in motion">Commits em movimento</h2>
+      </div>
+      <a href="https://github.com/Armando-Schoenstatt" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-400 hover:text-white transition-colors" data-pt="Acompanhe no GitHub ↗" data-en="Follow on GitHub ↗">Acompanhe no GitHub ↗</a>
+    </div>
+    <div id="github-commits-app"></div>
+  </div>
+</section>
 
 <!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
 <section id="about" class="py-24 px-6">
@@ -158,6 +186,60 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════ CERTIFICATES ═══════════════════════════ -->
+<section id="certificates" class="py-24 px-6" style="background:rgba(17,24,39,0.4)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <p class="text-primary text-xs font-bold tracking-[0.2em] uppercase mb-3">Formação contínua</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3" data-pt="Certificados" data-en="Certificates">Certificados</h2>
+      <p class="text-gray-400 text-sm" data-pt="Cursos e conhecimentos que fazem parte da minha jornada." data-en="Courses and skills that are part of my journey.">Cursos e conhecimentos que fazem parte da minha jornada.</p>
+      <div class="w-16 h-1 bg-primary mx-auto rounded-full mt-4"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a class="certificate-card card p-5" href="./certificados/computer-hardware-basics.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="certificate-icon" aria-hidden="true">⌘</span>
+        <span class="certificate-copy">
+          <strong>Computer Hardware Basics</strong>
+          <span>Cisco Networking Academy</span>
+          <span class="certificate-open" data-pt="Abrir certificado ↗" data-en="Open certificate ↗">Abrir certificado ↗</span>
+        </span>
+      </a>
+      <a class="certificate-card card p-5" href="./certificados/digital-awareness.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="certificate-icon" aria-hidden="true">◎</span>
+        <span class="certificate-copy">
+          <strong>Digital Awareness</strong>
+          <span>Cisco Networking Academy</span>
+          <span class="certificate-open" data-pt="Abrir certificado ↗" data-en="Open certificate ↗">Abrir certificado ↗</span>
+        </span>
+      </a>
+      <a class="certificate-card card p-5" href="./certificados/getting-started-cisco-packet-tracer.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="certificate-icon" aria-hidden="true">⌁</span>
+        <span class="certificate-copy">
+          <strong>Getting Started with Cisco Packet Tracer</strong>
+          <span>Cisco Networking Academy</span>
+          <span class="certificate-open" data-pt="Abrir certificado ↗" data-en="Open certificate ↗">Abrir certificado ↗</span>
+        </span>
+      </a>
+      <a class="certificate-card card p-5" href="./certificados/introduction-to-cybersecurity.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="certificate-icon" aria-hidden="true">⛨</span>
+        <span class="certificate-copy">
+          <strong>Introduction to Cybersecurity</strong>
+          <span>Cisco Networking Academy</span>
+          <span class="certificate-open" data-pt="Abrir certificado ↗" data-en="Open certificate ↗">Abrir certificado ↗</span>
+        </span>
+      </a>
+      <a class="certificate-card card p-5" href="./certificados/certificado-adicional.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="certificate-icon" aria-hidden="true">✦</span>
+        <span class="certificate-copy">
+          <strong data-pt="Certificado adicional" data-en="Additional certificate">Certificado adicional</strong>
+          <span>Arquivo PDF</span>
+          <span class="certificate-open" data-pt="Abrir certificado ↗" data-en="Open certificate ↗">Abrir certificado ↗</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════ FOOTBALL DEMO ═══════════════════════════ -->
 <section id="football" class="py-24 px-6">
   <div class="max-w-6xl mx-auto">
@@ -175,7 +257,7 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-10">
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-3" data-pt="Currículo em PDF" data-en="PDF résumé">Currículo em PDF</h2>
-      <p class="text-gray-400 text-sm" data-pt="Uma prévia interativa do meu currículo." data-en="An interactive preview of my résumé.">Uma prévia interativa do meu currículo.</p>
+      <p class="text-gray-400 text-sm" data-pt="Consulte e baixe meu currículo em PDF." data-en="View and download my résumé in PDF format.">Consulte e baixe meu currículo em PDF.</p>
       <div class="w-16 h-1 bg-primary mx-auto rounded-full mt-3"></div>
     </div>
     <div id="curriculum-app"></div>
@@ -184,12 +266,7 @@
 
 <!-- ═══════════════════════════ GITHUB PROFILE ════════════════════════════════ -->
 <section id="github-profile" class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3" data-pt="Meu GitHub" data-en="My GitHub">Meu GitHub</h2>
-      <p class="text-gray-400 text-sm" data-pt="Resumo da minha conta e dos meus repositórios públicos." data-en="An overview of my account and public repositories.">Resumo da minha conta e dos meus repositórios públicos.</p>
-      <div class="w-16 h-1 bg-primary mx-auto rounded-full mt-3"></div>
-    </div>
+  <div class="max-w-[1400px] mx-auto">
     <div id="github-profile-app"></div>
   </div>
 </section>

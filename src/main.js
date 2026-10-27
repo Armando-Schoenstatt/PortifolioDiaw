@@ -1,4 +1,6 @@
 // ─── DATA ───────────────────────────────────────────────────────────────────
+import portfolioProjectImage from '../apps/ContributorStats/imgs/Home.png';
+
 const PROJECTS = [
   {
     year: '2026',
@@ -10,6 +12,7 @@ const PROJECTS = [
     techs: ['Java', 'Spring Boot', 'REST API', 'Maven'],
     github: 'https://github.com/Armando-Schoenstatt/API-Clima-BH',
     image: null,
+    cover: 'weather',
   },
   {
     year: '2026',
@@ -21,6 +24,7 @@ const PROJECTS = [
     techs: ['HTML', 'CSS', 'JavaScript'],
     github: 'https://github.com/Armando-Schoenstatt/Marvel-Rivals',
     image: null,
+    cover: 'marvel',
   },
   {
     year: '2026',
@@ -32,6 +36,7 @@ const PROJECTS = [
     techs: ['React', 'Node.js', 'MongoDB', 'Express'],
     github: 'https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2026-1-ti1-0427100-study-link',
     image: null,
+    cover: 'study',
   },
   {
     year: '2026',
@@ -42,7 +47,8 @@ const PROJECTS = [
     },
     techs: ['JavaScript', 'CSS', 'HTML'],
     github: 'https://github.com/Armando-Schoenstatt/casa-recepcoes-impacto',
-    image: null,
+    image: 'https://raw.githubusercontent.com/Armando-Schoenstatt/casa-recepcoes-impacto/main/public/Imagens/WhatsApp%20Image%202026-01-14%20at%2012.53.13.jpeg',
+    cover: 'events',
   },
   {
     year: '2026',
@@ -54,6 +60,7 @@ const PROJECTS = [
     techs: ['Java 17', 'Spring Boot', 'Spring Security', 'JWT', 'MySQL', 'Swagger'],
     github: 'https://github.com/Armando-Schoenstatt/ProjetoApiRest',
     image: null,
+    cover: 'security',
   },
   {
     year: '2026',
@@ -65,6 +72,7 @@ const PROJECTS = [
     techs: ['Java', 'HTML', 'CSS'],
     github: 'https://github.com/Armando-Schoenstatt/LoginPucAtv02',
     image: null,
+    cover: 'login',
   },
   {
     year: '2026',
@@ -75,7 +83,8 @@ const PROJECTS = [
     },
     techs: ['HTML', 'Tailwind CSS', 'JavaScript', 'EmailJS'],
     github: 'https://github.com/Armando-Schoenstatt/PortifolioDiaw',
-    image: null,
+    image: portfolioProjectImage,
+    cover: 'portfolio',
   },
 ];
 
@@ -188,9 +197,21 @@ function renderTimeline() {
   const container = document.getElementById('timeline');
   container.innerHTML = PROJECTS.map((p, i) => {
     const isRight = i % 2 === 0;
-    const imgHtml = p.image
-      ? `<img src="${p.image}" alt="${p.name}" class="w-full h-40 object-cover rounded-xl mb-4" />`
-      : `<div class="w-full h-32 rounded-xl mb-4 flex items-center justify-center text-4xl" style="background:rgba(209,213,219,0.08);border:1px dashed rgba(209,213,219,0.2)">🖥️</div>`;
+    const imgHtml = `
+      <div class="project-cover project-cover--${p.cover}" role="img" aria-label="${lang === 'pt' ? 'Prévia visual do projeto' : 'Project visual preview'}: ${p.name}">
+        ${p.image ? `<img src="${p.image}" alt="${lang === 'pt' ? 'Imagem do projeto' : 'Project image'}: ${p.name}" class="project-cover__image" loading="lazy" decoding="async" />` : ''}
+        <div class="project-cover__fallback" aria-hidden="true">
+          <div class="project-window">
+            <div class="project-window__bar"><span></span><span></span><span></span><i>${p.name}</i></div>
+            <div class="project-window__content">
+              <span class="project-window__eyebrow">${p.techs[0]}</span>
+              <strong>${p.name}</strong>
+              <div class="project-window__lines"><i></i><i></i><i></i></div>
+              <span class="project-window__symbol">${p.cover === 'security' ? '◈' : p.cover === 'weather' ? '☼' : p.cover === 'events' ? '✦' : p.cover === 'marvel' ? '✧' : p.cover === 'study' ? '▤' : p.cover === 'login' ? '◉' : '⌘'}</span>
+            </div>
+          </div>
+        </div>
+      </div>`;
     return `
     <div class="relative flex items-start gap-6 md:gap-0 timeline-item">
       <!-- dot -->
@@ -218,6 +239,10 @@ function renderTimeline() {
       </div>
     </div>`;
   }).join('');
+
+  container.querySelectorAll('.project-cover__image').forEach(image => {
+    image.addEventListener('error', () => { image.hidden = true; }, { once: true });
+  });
 }
 
 // ─── EXPERIENCE ──────────────────────────────────────────────────────────────
