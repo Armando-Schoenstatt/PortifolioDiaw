@@ -1,55 +1,26 @@
 import { useEffect, useState } from "react";
 
 const USERNAME = "Armando-Schoenstatt";
-const EVENTS_URL = `https://api.github.com/users/${USERNAME}/events/public?per_page=100`;
+const COMMITS_URL = "/api/commits";
 
 async function requestJson(url, signal) {
-  const response = await fetch(url, {
-    headers: { Accept: "application/vnd.github+json" },
-    signal,
-  });
+  const response = await fetch(url, { signal });
 
   if (!response.ok) {
-    if (response.status === 403) {
-      throw new Error("O limite temporário da API do GitHub foi atingido. Tente novamente mais tarde.");
-    }
-    throw new Error(`Não foi possível carregar a atividade do GitHub (erro ${response.status}).`);
+    const result = await response.json().catch(() => ({}));
+    throw new Error(result.error || `Não foi possível carregar a atividade do GitHub (erro ${response.status}).`);
   }
 
   return response.json();
 }
 
 async function fetchRecentCommits(signal) {
-  const events = await requestJson(EVENTS_URL, signal);
-  if (!Array.isArray(events)) {
+  const result = await requestJson(COMMITS_URL, signal);
+  if (!Array.isArray(result.commits)) {
     throw new Error("O GitHub retornou uma resposta de atividade inválida.");
   }
 
-  const uniquePushes = new Map();
-  events
-    .filter((event) => event.type === "PushEvent" && event.repo?.name && event.payload?.head)
-    .forEach((event) => {
-      const key = `${event.repo.name}:${event.payload.head}`;
-      if (!uniquePushes.has(key)) uniquePushes.set(key, event);
-    });
-
-  const pushes = [...uniquePushes.values()].slice(0, 8);
-  return Promise.all(
-    pushes.map(async (event) => {
-      const commit = await requestJson(
-        `https://api.github.com/repos/${event.repo.name}/commits/${event.payload.head}`,
-        signal
-      );
-
-      return {
-        sha: commit.sha,
-        message: commit.commit.message.split(/\r?\n/, 1)[0] || "Atualização do projeto",
-        date: commit.commit.author?.date || event.created_at,
-        repository: event.repo.name,
-        url: commit.html_url,
-      };
-    })
-  );
+  return result.commits;
 }
 
 export default function GitHubCommits() {

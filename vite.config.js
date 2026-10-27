@@ -4,12 +4,14 @@ import { GITHUB_PATH, handleGitHub } from './apps/ContributorStats/api/_github.j
 import { ESPN_PATH, handleEspn } from './apps/ESPN_API/api/_espn.js'
 import { handleCodando, CODANDO_PATH } from './apps/WakaTimeAPI/api/_codando.js'
 import { handleWakaTime, WAKATIME_PATH } from './apps/WakaTimeAPI/api/_wakatime.js'
+import { COMMITS_PATH, handleCommits } from './api/commits.js'
 
 const API_ROUTES = {
   [GITHUB_PATH]: handleGitHub,
   [ESPN_PATH]: handleEspn,
   [CODANDO_PATH]: handleCodando,
   [WAKATIME_PATH]: handleWakaTime,
+  [COMMITS_PATH]: handleCommits,
 }
 
 function portfolioApi(env) {
