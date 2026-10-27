@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const USERNAME = "Armando-Schoenstatt";
-const CONTRIBUTIONS_URL = `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
-const PROFILE_URL = `https://api.github.com/users/${USERNAME}`;
-const REPOSITORIES_URL = `${PROFILE_URL}/repos?sort=updated&per_page=4`;
+const ACTIVITY_URL = "/api/github-activity";
 
 async function fetchJson(url, signal) {
   const response = await fetch(url, {
@@ -22,17 +20,12 @@ async function fetchJson(url, signal) {
 }
 
 async function fetchActivity(signal) {
-  const [contributionData, profile, repositories] = await Promise.all([
-    fetchJson(CONTRIBUTIONS_URL, signal),
-    fetchJson(PROFILE_URL, signal),
-    fetchJson(REPOSITORIES_URL, signal),
-  ]);
-
-  if (!Array.isArray(contributionData.contributions) || contributionData.contributions.length === 0 || !Array.isArray(repositories)) {
+  const result = await fetchJson(ACTIVITY_URL, signal);
+  if (!Array.isArray(result.contributions) || result.contributions.length === 0 || !Array.isArray(result.repositories)) {
     throw new Error("O GitHub retornou dados em um formato inesperado.");
   }
 
-  const contributions = contributionData.contributions.slice(-365);
+  const contributions = result.contributions;
   let longestStreak = 0;
   let streak = 0;
 
@@ -59,8 +52,8 @@ async function fetchActivity(signal) {
         : 0
       : currentStreak,
     longestStreak,
-    publicRepositories: profile.public_repos,
-    repositories,
+    publicRepositories: result.publicRepositories,
+    repositories: result.repositories,
   };
 }
 
@@ -284,7 +277,6 @@ function GitHubActivity() {
               <span className="github-repository__name">{repository.name}<i>↗</i></span>
               <span className="github-repository__details">
                 <span>{repository.language || text.noLanguage}</span>
-                <span>★ {repository.stargazers_count}</span>
                 <span>{updatedDate.format(new Date(repository.updated_at))}</span>
               </span>
             </a>
