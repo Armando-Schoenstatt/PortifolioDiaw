@@ -27,7 +27,9 @@ As integrações estão disponíveis no código local; estas alterações ainda 
 
 ## 📦 Dependências e Bibliotecas
 
-O HTML da página fica em `index.html`; estilos e interações estão em `src/styles.css` e `src/main.js`. Os projetos interativos ficam incorporados diretamente nas seções do portfólio: o globo de habilidades aparece após **Sobre Mim**, Futebol após **Projetos** e Colaboradores GitHub em uma seção própria. A seção de currículo exibe `CurriculoArmandoSchoenstatt.pdf` por padrão, permite baixá-lo e também selecionar outro PDF local para visualização sem enviá-lo ao servidor. O efeito de cursor ReactBits continua global e sem botão. O código do WakaTime permanece no repositório, mas não aparece na interface. O site usa Tailwind CSS via CDN.
+O HTML da página fica em `index.html`; estilos e interações estão em `src/styles.css` e `src/main.js`. A atividade recente do GitHub aparece em uma faixa animada antes de **Sobre Mim**; o globo de habilidades vem depois da apresentação, Futebol após **Projetos** e o painel GitHub mostra o calendário anual de contribuições, estatísticas e repositórios recentes. O globo acompanha a direção do arrasto nos eixos horizontal e vertical. As seções de projetos incluem imagens públicas quando disponíveis e prévias ilustradas quando não há captura. Os certificados em `public/certificados/` são exibidos na seção **Certificados**. A seção de currículo exibe e permite baixar somente `CurriculoArmandoSchoenstatt.pdf`. O efeito de cursor ReactBits continua global e sem botão. O código do WakaTime permanece no repositório, mas não aparece na interface. O site usa Tailwind CSS via CDN.
+
+Para incluir outros certificados, coloque os PDFs em `public/certificados/` e adicione um cartão com o caminho e o nome correspondentes na seção de certificados em `index.html`. As imagens e prévias dos projetos são configuradas no array `PROJECTS` em `src/main.js`; substitua o campo `image` por uma captura pública ou local quando tiver novas imagens.
 
 ```html
 <!-- Tailwind CSS -->
@@ -52,6 +54,8 @@ PortifolioDiaw/
 │   ├── components/        # Globo de habilidades, painéis integrados e currículo
 │   ├── main.js            # Conteúdo e interações do portfólio
 │   └── styles.css         # Estilos específicos do site
+├── public/
+│   └── certificados/      # PDFs apresentados na seção de certificados
 ├── apps/
 │   ├── ReactBits/         # Efeito de cursor Fumaça, sem controles
 │   ├── ContributorStats/  # Análise de colaboradores do GitHub
@@ -75,7 +79,7 @@ npm install
 npm run dev
 ```
 
-Abra o endereço local informado pelo Vite. O globo de habilidades fica abaixo de **Sobre Mim**; o painel compacto de Futebol, abaixo de **Projetos**; e Colaboradores GitHub carrega automaticamente as contribuições do repositório `Armando-Schoenstatt/PortifolioDiaw`, com um link para o perfil completo. O currículo permite selecionar um PDF local para pré-visualização.
+Abra o endereço local informado pelo Vite. A faixa de commits e a seção de certificados carregam com o portfólio; o globo de habilidades fica abaixo de **Sobre Mim**; o painel compacto de Futebol, abaixo de **Projetos**; e o painel GitHub carrega automaticamente as contribuições públicas do último ano, as estatísticas do perfil e os repositórios atualizados recentemente. O currículo exibe sempre o arquivo PDF do projeto.
 
 As consultas da ESPN passam por `/api/espn` no mesmo servidor e só encaminham os endpoints usados pelo painel. Isso evita bloqueios de CORS e não exige chave da ESPN.
 
@@ -131,10 +135,12 @@ O build gera o portfólio e os quatro aplicativos em `dist/`.
 ## ✅ Seções do Portfólio
 
 - **Hero** — Apresentação com nome, cargo e CTAs
+- **Commits recentes** — Atividade pública do GitHub em uma faixa animada
 - **Sobre Mim** — Descrição em Português 🇧🇷 e Inglês 🇺🇸
-- **Habilidades** — Globo 3D interativo, com filtro por categoria e visualização em lista
+- **Habilidades** — Globo 3D interativo que acompanha o arrasto nos eixos X e Y, com filtro por categoria e visualização em lista
 - **Projetos** — Timeline e painel de futebol ao vivo integrado
-- **Currículo em PDF** — Pré-visualização de arquivo escolhido localmente
+- **Certificados** — PDFs para abrir diretamente no navegador
+- **Currículo em PDF** — Pré-visualização e download do currículo do projeto
 - **Colaboradores GitHub** — Painel interativo integrado à página
 - **Experiências** — Histórico acadêmico e profissional
 - **Contato** — Links sociais + formulário funcional com validação
@@ -156,6 +162,9 @@ O código reaproveitado mantém os avisos de licença MIT do projeto original; o
 - [x] Alternância de idioma PT/EN
 - [x] Navbar fixa com scroll suave
 - [x] Timeline de projetos
+- [x] Prévia visual para cada projeto
+- [x] Commits recentes do GitHub em movimento
+- [x] Seção de certificados com PDFs locais
 - [x] Formulário com validação e envio via EmailJS
 - [x] Links sociais (GitHub, LinkedIn, WhatsApp, E-mail)
 - [x] Menu mobile (hamburger)

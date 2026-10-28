@@ -221,10 +221,10 @@ export default function SkillsGlobe({ skills, speed = 0.15, color = "#005380" })
     if (m.moved > DRAG_THRESHOLD && !stageRef.current.hasPointerCapture(e.pointerId)) {
       stageRef.current.setPointerCapture(e.pointerId);
     }
-    m.ry += dx * 0.006;
-    m.rx = Math.max(-MAX_TILT, Math.min(MAX_TILT, m.rx - dy * 0.006));
-    m.vy = dx * 0.006;
-    m.vx = -dy * 0.006;
+    m.ry -= dx * 0.006;
+    m.rx = Math.max(-MAX_TILT, Math.min(MAX_TILT, m.rx + dy * 0.006));
+    m.vy = -dx * 0.006;
+    m.vx = dy * 0.006;
   };
 
   const onPointerUp = () => {

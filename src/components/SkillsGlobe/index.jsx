@@ -164,10 +164,10 @@ export default function SkillsGlobe({ skills, speed = 0.15, color = '#6366f1' })
     m.moved = Math.hypot(e.clientX - m.start.x, e.clientY - m.start.y)
     if (m.moved > DRAG_THRESHOLD && !stageRef.current.hasPointerCapture(e.pointerId))
       stageRef.current.setPointerCapture(e.pointerId)
-    m.ry += dx * 0.006
-    m.rx = Math.max(-MAX_TILT, Math.min(MAX_TILT, m.rx - dy * 0.006))
-    m.vy = dx * 0.006
-    m.vx = -dy * 0.006
+    m.ry -= dx * 0.006
+    m.rx = Math.max(-MAX_TILT, Math.min(MAX_TILT, m.rx + dy * 0.006))
+    m.vy = -dx * 0.006
+    m.vx = dy * 0.006
   }
 
   const onPointerUp = () => { motion.current.dragging = false }
